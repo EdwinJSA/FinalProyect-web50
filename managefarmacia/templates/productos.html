@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<style>
+    .scroll-container {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+</style>
+
+<div class="col-12 d-flex align-items-center justify-content-center">
+    <form class="col-6" id="form">
+        {% csrf_token %}
+        {{ form }}
+        <button type="button" class="mt-2 btn btn-success" onclick="nuevoProducto()">Agregar</button>
+    </form>
+    <div>
+        <h5>Productos Registrados</h5>
+        <div class="scroll-container">
+            <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Cod.</th>
+                    <th>Nomb. Gen</th>
+                    <th>Categ.</th>
+                    <th>lab.</th>
+                    <th>via</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr id="registrados">
+                  </tr>
+                  {% for i in productos %}
+                  <tr>
+                    <td>{{ i.codigo }}</td>
+                    <td>{{ i.nombre_generico }}</td>
+                    <td>{{ i.categoria }}</td>
+                    <td>{{ i.laboratorio }}</td>
+                    <td>{{ i.via }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              
+            <span ></span>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}  

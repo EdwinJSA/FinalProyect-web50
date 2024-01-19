@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viaModal">
+  Agregar Via
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="viaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva Via de Administracion</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="text" name="nuevaVia" class="col-12 mb-4">
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">vías de administración</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in vias %}
+          <tr>
+            <th scope="row">{{ i.id }}</th>
+            <td>{{i.nombre}}</td>
+            <td>
+                <a href="{% url 'eliminarVia' i.id %}">
+                  <button>Eliminar</button>
+                </a>
+            </td>
+          </tr>
+          {% endfor %}
+      </table>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#unidadModal">
+  Agregar Unidad de Medida
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="unidadModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva Unidad de Medida</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="text" name="nuevaUnidad" class="col-12 mb-4" placeholder="Nueva Unidad de Medida">
+          <input type="number" name="minimo" class="col-12 mb-4" placeholder="Minimo en Stock">
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Unidad de Medida</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in unidades %}
+          <tr>
+            <th scope="row">{{ i.id }}</th>
+            <td>{{i.nombre}}</td>
+            <td>
+                <a href="{% url 'eliminarUnidad' i.id %}">
+                  <button>Eliminar</button>
+                </a>
+            </td>
+          </tr>
+          {% endfor %}
+      </table>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <h3>Administrador</h3>
+    <div class="container d-flex">
+        <div class="d-block">
+            <div>
+                <a href="{% url 'categoria' %}">Categoria</a>
+            </div>
+            <div>
+                <a href="">Compras</a>
+            </div>
+            <div>
+                <a href="">Inventarios</a> 
+            </div>
+            <div>
+                <a href="{% url "laboratorio" %}">Laboratorio</a>
+            </div>
+            <div>
+                <a href="">Movimientos</a>
+            </div>
+            <div>
+                <a href="{% url "productos" %}">Productos</a>
+            </div>
+            <div>
+                <a href="{% url 'proveedor' %}">Proveedores</a>
+            </div>
+            <div>
+                <a href="{% url 'unidad' %}">Unidad de Medida</a>
+            </div>
+            <div>
+                <a href="{% url "via" %}">Via de Consumo</a>
+            </div>
+        </div>
+        <div class="registro_actividad">
+            <h4>Acciones recientes</h4>
+        </div>
+    </div>
+{% endblock %}
