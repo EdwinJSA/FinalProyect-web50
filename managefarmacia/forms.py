@@ -23,3 +23,8 @@ class nueva_compra(forms.Form):
         required=True
     )
     
+class nueva_venta(forms.Form):
+    codigo = forms.CharField(max_length=50, disabled=True)
+    producto = forms.CharField(max_length=50, disabled=True)
+    cantidad = forms.IntegerField(required=True)
+    precio_unidad = forms.FloatField(required=True, disabled=True)

@@ -68,3 +68,12 @@ class movimiento(models.Model):
     
     def __str__(self):
         return f"Entrada: {self.entrada} - Monto: {self.monto}"
+    
+class venta(models.Model):
+    id_producto = models.ForeignKey(producto, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+    monto = models.FloatField()
+    fecha = models.DateField()
+    
+    def __str__(self):
+        return f"Producto: {self.id_producto} - Monto: {self.monto}"

@@ -1,3 +1,6 @@
+var listaArticulos = [];
+var total=0;
+
 function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -89,4 +92,78 @@ function activarBoton(){
     control.style.backgroundColor = "green";
     control.style.color = "white";
     control.disabled = true;
+}
+
+document.addEventListener('keyup', (event) => {
+    if(event.target.matches('#buscadorProductos')){
+        document.querySelectorAll('.articulos').forEach(elemento => {
+            if(!elemento.textContent.toLowerCase().includes(event.target.value.toLowerCase())){
+                elemento.classList.add('d-none');
+            }else{
+                elemento.classList.remove('d-none');
+            }
+        })
+    }
+})
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.articulos').forEach(function(elemento) {
+        elemento.addEventListener('click', function() {
+            var nombreCientifico = this.dataset.nombreCientifico;
+            var precio = this.dataset.precio;
+            var codigo = this.dataset.codigo;
+
+            const producto = document.getElementById('id_producto');
+            const dinero = document.getElementById('id_precio_unidad');
+            const id = document.getElementById('id_codigo');
+
+            producto.value = nombreCientifico;
+            dinero.value = precio;  
+            id.value = codigo;
+        });
+    });
+});
+
+
+function agregarCarrito(){
+    car = document.getElementById('pr_registrados');
+
+     listaArticulos.push({
+        id: document.getElementById('id_codigo').value,
+        cantidad: document.getElementById('id_cantidad').value,
+    })
+
+    localStorage.setItem('carrito', JSON.stringify(listaArticulos));
+
+    car.innerHTML += `<tr id="${document.getElementById('id_codigo').value}">
+    <td>`+ document.getElementById('id_codigo').value + `</td>
+    <td>`+ document.getElementById('id_producto').value + `</td>
+    <td>`+ document.getElementById('id_cantidad').value + `</td>
+    <td>`+ document.getElementById('id_precio_unidad').value + `</td>
+    <td>`+ document.getElementById('id_cantidad').value * document.getElementById('id_precio_unidad').value + `</td>
+    <td><button type=button onclick="borrarArticulo(${document.getElementById('id_codigo').value})">Borrar</button></td></td>
+    </tr>`
+
+    total += document.getElementById('id_cantidad').value * document.getElementById('id_precio_unidad').value;
+
+    console.log(total);
+}
+
+function borrarArticulo(id) {
+    console.log(localStorage.getItem('carrito'));
+
+    var carrito = JSON.parse(localStorage.getItem('carrito'));
+
+    for (var i = 0; i < carrito.length; i++) {
+        if (carrito[i].id == id) {
+            //The splice() method of Array instances changes the contents of an array by removing or replacing existing elements and/or adding new elements in place.
+            carrito.splice(i, 1);
+        }
+    }
+
+    total -= document.getElementById(id).children[4].textContent;
+
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    document.getElementById(id).remove();
 }

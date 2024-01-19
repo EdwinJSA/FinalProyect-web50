@@ -177,10 +177,20 @@ def nueva_compra_views(request):
             
         prod = producto.objects.get(id = data['producto'])
         prod.fecha_vencimiento = data['fecha']
-        prod.precio = precio
+        prod.precio = (precio*1.35)
         prod.cantidad = prod.cantidad + cant
         prod.save()
         
         return JsonResponse({'mensaje': 'La compra se ha realizado con éxito'})	
     except Exception as e:
         return JsonResponse({'mensaje': str(e)})
+    
+def ventas_views(request):
+    return render(request, 'ventas.html',{
+        'form': nueva_venta(),
+        'productos': producto.objects.all()
+    })
+
+def comprarProducto_views(request, codigo):
+    print(codigo)
+    return JsonResponse({'mensaje': 'Entro al metodo'}, status=405)

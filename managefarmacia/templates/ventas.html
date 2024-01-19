@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="container">
+        <div class="listaProductos">
+            <div class="gestion">
+                {{ form }}
+                <button type="button" onclick="agregarCarrito()">Agregar al Carrito</button>
+            </div>
+            <div class="carrito">
+                <table class="table">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Cod.</th>
+                        <th>Nomb. Gen</th>
+                        <th>Cant.</th>
+                        <th>P/U.</th>
+                        <th>Subtotal</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="pr_registrados">
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        <div class="otros">
+            <div class="buscar">
+                <input type="text" class="text" placeholder="Buscar Producto" id="buscadorProductos">
+                <ul>
+                    {% for i in productos %}
+                        <button class="articulos" data-nombre-cientifico="{{ i.nombre_cientifico }}" data-precio="{{ i.precio }}" data-codigo="{{ i.codigo }}">
+                            {{ i.nombre_cientifico }} / {{ i.nombre_generico }} / C$ {{ i.precio }} / Unidad: {{ i.unidad.nombre }}
+                        </button>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="vademecu"></div>
+        </div>
+    </div>
+{% endblock %}
