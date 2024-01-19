@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import categoria, proveedor, unidad_Medida, laboratorio, via_consumo
 from .forms import *
 from django.http import HttpResponse, JsonResponse
 import json
+from datetime import datetime
+
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
@@ -131,8 +133,54 @@ def guardar_producto_views(request):
             req_receta = receta,
             laboratorio = laboratorio.objects.get(id = lab),
             unidad = unidad_Medida.objects.get(id = unidad_medida),
+            precio = 0.0,
+            fecha_vencimiento = '2023-01-01',
+            cantidad = 0
         ).save()
         
         return JsonResponse({'mensaje': 'Producto guardado exitosamente'})
     else:
         return JsonResponse({'mensaje': 'Método no permitido'}, status=405)
+
+def eliminarProducto_views(request, id):
+    producto.objects.get(codigo=id).delete()
+    return HttpResponseRedirect('/productos',{
+        'form': nuevo_producto(),
+        'productos': producto.objects.all().order_by('id').reverse()
+    })
+    
+def compra_views(request):
+    return render(request, 'compra.html',{
+        'form': nueva_compra(),
+    })
+    
+def nueva_compra_views(request):
+    try:
+        data = json.loads(request.body)
+        print(data)
+        cant = int(data['cantidad'])
+        precio = float(data['precio'])
+        
+        compra(
+            id_proveedor = proveedor.objects.get(id = data['proveedor']),
+            id_producto = producto.objects.get(id = data['producto']),
+            cantidad = data['cantidad'],
+            precio_unidad = data['precio'],
+            fecha_vencimiento = data['fecha']
+        ).save()
+        
+        movimiento(
+            entrada = False, 
+            monto = float(cant*precio),
+            fecha = datetime.now().date()
+        ).save()
+            
+        prod = producto.objects.get(id = data['producto'])
+        prod.fecha_vencimiento = data['fecha']
+        prod.precio = precio
+        prod.cantidad = prod.cantidad + cant
+        prod.save()
+        
+        return JsonResponse({'mensaje': 'La compra se ha realizado con éxito'})	
+    except Exception as e:
+        return JsonResponse({'mensaje': str(e)})

@@ -12,4 +12,14 @@ class nuevo_producto(forms.Form):
     laboratorio = forms.ModelChoiceField(queryset=laboratorio.objects.all())
     unidad_Medida = forms.ModelChoiceField(queryset=unidad_Medida.objects.all())
     
+class nueva_compra(forms.Form):
+    proveedor = forms.ModelChoiceField(queryset=proveedor.objects.all(), required=True)
+    producto = forms.ModelChoiceField(queryset=producto.objects.all(), required=True)
+    cantidad = forms.IntegerField(required=True)
+    precio_unidad = forms.FloatField(required=True)
+    fecha_vencimiento = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        input_formats=['%Y-%m-%d'].index,
+        required=True
+    )
     

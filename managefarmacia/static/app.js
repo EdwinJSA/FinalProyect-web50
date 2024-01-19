@@ -48,10 +48,45 @@ function nuevoProducto(){
             <td>`+ f['id_nombre_generico'].value + `</td>
             <td>`+ textcat + `</td>
             <td>`+ textlab + `</td>
-            <td>`+ textvia + `</td>`
+            <td>`+ textvia + `</td>
+            <td><a href="{% url 'eliminarProducto' i.codigo %}">Borrar</a></td>`
         }else{
             alert("El producto ya existe o el Código esta repetido");
         }
         f.reset();
     })
+}
+
+function nuevaCompra(){
+    const f = document.getElementById('form');
+    fetch('/nuevaCompra', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({
+            proveedor: f['id_proveedor'].value,
+            producto: f['id_producto'].value,
+            cantidad: f['id_cantidad'].value,
+            precio: f['id_precio_unidad'].value,
+            fecha: f['id_fecha_vencimiento'].value
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.mensaje);
+        f.reset();
+    })
+}
+
+function activarBoton(){
+    control = document.getElementById('controlClick');
+    activar = document.getElementById('completar');
+    
+    activar.disabled = false;
+    control.innerHTML = "Comprobado";
+    control.style.backgroundColor = "green";
+    control.style.color = "white";
+    control.disabled = true;
 }

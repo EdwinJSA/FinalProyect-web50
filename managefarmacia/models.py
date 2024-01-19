@@ -37,18 +37,13 @@ class producto(models.Model):
     req_receta = models.BooleanField()
     laboratorio = models.ForeignKey(laboratorio, on_delete=models.CASCADE)
     unidad = models.ForeignKey(unidad_Medida, on_delete=models.CASCADE)
+    precio = models.FloatField()
+    fecha_vencimiento = models.DateField()
+    cantidad = models.IntegerField()
     
     def __str__(self):
         return f"{self.codigo} - {self.nombre_generico}"
-    
-class inventario(models.Model):
-    id_producto = models.ForeignKey(producto, on_delete=models.CASCADE)
-    unidad = models.ForeignKey(unidad_Medida, on_delete=models.CASCADE)
-    stock = models.IntegerField()
-    precio = models.FloatField()
-    
-    def __str__(self):
-        return f"Producto: {self.id_producto} - En Stock: {self.stock}"
+
     
 class proveedor(models.Model):
     nombre = models.CharField(max_length=50)

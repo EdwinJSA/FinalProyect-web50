@@ -25,6 +25,7 @@
                     <th>Categ.</th>
                     <th>lab.</th>
                     <th>via</th>
+                    <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -37,6 +38,7 @@
                     <td>{{ i.categoria }}</td>
                     <td>{{ i.laboratorio }}</td>
                     <td>{{ i.via }}</td>
+                    <td><a href="{% url 'eliminarProducto' i.codigo %}">Borrar</a></td>
                   </tr>
                   {% endfor %}
                 </tbody>
