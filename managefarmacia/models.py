@@ -77,3 +77,12 @@ class venta(models.Model):
     
     def __str__(self):
         return f"Producto: {self.id_producto} - Monto: {self.monto}"
+    
+class recetas(models.Model):
+    id_compra = models.ForeignKey(compra, on_delete=models.CASCADE),
+    id_producto = models.ForeignKey(producto, on_delete=models.CASCADE),
+    medico = models.CharField(max_length=50),
+    codMinsa = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return f"Medico: {self.medico} - Medicamento: {self.id_producto}"

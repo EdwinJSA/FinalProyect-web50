@@ -191,6 +191,61 @@ def ventas_views(request):
         'productos': producto.objects.all()
     })
 
-def comprarProducto_views(request, codigo):
-    print(codigo)
-    return JsonResponse({'mensaje': 'Entro al metodo'}, status=405)
+def comprarProducto_views(request):
+    try:
+        carrito = json.loads(request.body)
+        print(carrito)
+        
+        compras = carrito.get('compras', [])
+        descuento = carrito.get('descuento', False)
+        total = carrito.get('total', 0.0)
+        medico = carrito.get('medico', '')
+        codMinsa = carrito.get('codMinsa', '')
+        
+        for compra in compras:
+            print(f"{compra['id']} {compra['cantidad']}")
+            
+            producto_id = compra.get('id')
+            cantidad = compra.get('cantidad')
+            precio_unitario = float(compra.get('precio'))
+            
+            producto_obj = producto.objects.get(id=producto_id)
+            
+            if descuento:
+                monto = float(cantidad) * (producto_obj.precio * 0.9)
+            else:
+                monto = float(cantidad) * precio_unitario
+            
+            nueva_venta = venta(
+                id_producto=producto_obj,
+                cantidad=cantidad,
+                monto=monto,
+                fecha=datetime.now().date()
+            )
+            
+            nueva_venta.save()
+            print("Venta guardada correctamente.")
+        
+        movimiento(
+            entrada = True,
+            monto = total,
+            fecha = datetime.now().date()
+        ).save()
+        
+        if(medico and codMinsa):
+            recetas(
+                id_compra = nueva_venta,
+                id_producto = producto.objects.get(codigo=producto_id),
+                medico = medico,
+                codMinsa = codMinsa
+            ).save()
+        
+        #HACE FALTA AGREGAR EL MOVIMIENTO PARA EL INVENTARIO
+        
+        
+        return JsonResponse({'mensaje': 'Entró al método correctamente'}, status=200)
+    
+    except producto.DoesNotExist as e:
+        return JsonResponse({'mensaje': f'Error: Producto con id {producto_id} no encontrado.'}, status=400)
+    except Exception as e:
+        return JsonResponse({'mensaje': str(e)}, status=500)

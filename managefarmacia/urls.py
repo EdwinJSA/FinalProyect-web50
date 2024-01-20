@@ -19,5 +19,5 @@ urlpatterns = [
     path("compra", views.compra_views, name="compra"),
     path("nuevaCompra", views.nueva_compra_views, name="nuevaCompra"),
     path("ventas", views.ventas_views, name="ventas"),
-    path("comprarProducto/<str:codigo>", views.comprarProducto_views, name="comprarProducto"),
+    path("comprarProducto", views.comprarProducto_views, name="comprarProducto"),
 ]

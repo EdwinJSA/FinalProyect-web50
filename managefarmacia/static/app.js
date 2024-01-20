@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var nombreCientifico = this.dataset.nombreCientifico;
             var precio = this.dataset.precio;
             var codigo = this.dataset.codigo;
+            var receta = this.dataset.receta;
 
             const producto = document.getElementById('id_producto');
             const dinero = document.getElementById('id_precio_unidad');
@@ -121,6 +122,21 @@ document.addEventListener('DOMContentLoaded', function() {
             producto.value = nombreCientifico;
             dinero.value = precio;  
             id.value = codigo;
+
+            var medico = document.getElementById("nombreMedico");
+            console.log(medico)
+            console.log("Receta: " + receta)
+
+            if(receta == "True"){
+                medico.classList.remove('d-none')
+                medico.classList.add('d-block')
+                console.log("Se tiene que ver")
+            }
+            else{
+                medico.classList.remove('d-block')
+                medico.classList.add('d-none')
+                console.log("no se debe ver")
+            }
         });
     });
 });
@@ -132,6 +148,7 @@ function agregarCarrito(){
      listaArticulos.push({
         id: document.getElementById('id_codigo').value,
         cantidad: document.getElementById('id_cantidad').value,
+        precio: document.getElementById('id_precio_unidad').value
     })
 
     localStorage.setItem('carrito', JSON.stringify(listaArticulos));
@@ -146,6 +163,8 @@ function agregarCarrito(){
     </tr>`
 
     total += document.getElementById('id_cantidad').value * document.getElementById('id_precio_unidad').value;
+
+    document.getElementById('precioFinal').textContent = "Total: C$" + total;
 
     console.log(total);
 }
@@ -167,3 +186,47 @@ function borrarArticulo(id) {
     localStorage.setItem('carrito', JSON.stringify(carrito));
     document.getElementById(id).remove();
 }
+
+function completarVenta(){
+    var carrito = JSON.parse(localStorage.getItem('carrito'));
+    var check = document.getElementById('aplicarDescuento').checked;
+    var medico = document.getElementById("medico").value;
+    var codMinsa = document.getElementById("codMinsa").value;
+
+    fetch('comprarProducto',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({
+            compras: carrito,
+            descuento: check,
+            total: total,
+            medico: medico,
+            codMinsa: codMinsa
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        listaArticulos = [];
+        total=0;
+        localStorage.clear();
+        setTimeout(function() {
+            window.location.reload();
+        }, 1000);
+    })
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const aplicar = document.getElementById('aplicarDescuento');
+    const precioFinalElement = document.getElementById('precioFinal');
+
+    aplicar.addEventListener('change', () => {
+        if (aplicar.checked) {
+            total *= 0.9;
+        }
+        precioFinalElement.textContent = "Total: C$" + total.toFixed(2);
+    });
+})
