@@ -1,41 +1,72 @@
 {% extends "layout.html" %}
+{% load static %}
 
 {% block body %}
     <h3>Administrador</h3>
-    <div class="container d-flex">
-        <div class="d-block">
+    <div class="container d-flex col-12">
+        <div class="options col-5">
             <div>
-                <a href="{% url 'categoria' %}">Categoria</a>
+                <a href="{% url 'categoria' %}">
+                    <img id="icono" src="{% static 'resource/categoria.png' %}" alt="">
+                    Categoria
+                </a>
             </div>
             <div>
-                <a href="{% url "compra" %}">Compras</a>
+                <a href="{% url "compra" %}">
+                    <img id="icono" src="{% static 'resource/compras.png' %}" alt="">
+                    Compras
+                </a>
             </div>
             <div>
-                <a href="">Inventarios</a> 
+                <a href="">
+                    <img id="icono" src="{% static 'resource/inventario.png' %}" alt="">
+                    Inventarios
+                </a> 
             </div>
             <div>
-                <a href="{% url "laboratorio" %}">Laboratorio</a>
+                <a href="{% url "laboratorio" %}">
+                    <img id="icono" src="{% static 'resource/lab.png' %}" alt="">
+                    Laboratorio
+                </a>
             </div>
             <div>
-                <a href="">Movimientos</a>
+                <a href="">
+                    <img id="icono" src="{% static 'resource/movimientos.png' %}" alt="">
+                    Movimientos
+                </a>
             </div>
             <div>
-                <a href="{% url "productos" %}">Productos</a>
+                <a href="{% url "productos" %}">
+                    <img id="icono" src="{% static 'resource/productos.png' %}" alt="">
+                    Productos
+                </a>
             </div>
             <div>
-                <a href="{% url 'proveedor' %}">Proveedores</a>
+                <a href="{% url 'proveedor' %}">
+                    <img id="icono" src="{% static 'resource/proveedores.png' %}" alt="">
+                    Proveedores
+                </a>
             </div>
             <div>
-                <a href="{% url 'unidad' %}">Unidad de Medida</a>
+                <a href="{% url 'unidad' %}">
+                    <img id="icono" src="{% static 'resource/medida.png' %}" alt="">
+                    Unidad de Medida
+                </a>
             </div>
             <div>
-                <a href="{% url "via" %}">Via de Consumo</a>
+                <a href="{% url "via" %}">
+                    <img id="icono" src="{% static 'resource/consumo.png' %}" alt="">
+                    Via de Consumo
+                </a>
             </div>
             <div>
-                <a href="{% url "ventas" %}">Ventas</a>
+                <a href="{% url "ventas" %}">
+                    <img id="icono" src="{% static 'resource/ventas.png' %}" alt="">
+                    Ventas
+                </a>
             </div>
         </div>
-        <div class="registro_actividad">
+        <div class="registro_actividad col-5">
             <h4>Acciones recientes</h4>
         </div>
     </div>
