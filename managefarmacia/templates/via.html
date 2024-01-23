@@ -1,12 +1,6 @@
 {% extends "layout.html" %}
-
+{% load static %}
 {% block body %}
-
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viaModal">
-  Agregar Via
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="viaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -29,28 +23,41 @@
   </div>
 </div>
 
-<div>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Código</th>
-            <th scope="col">vías de administración</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for i in vias %}
-          <tr>
-            <th scope="row">{{ i.id }}</th>
-            <td>{{i.nombre}}</td>
-            <td>
-                <a href="{% url 'eliminarVia' i.id %}">
-                  <button>Eliminar</button>
-                </a>
-            </td>
-          </tr>
-          {% endfor %}
-      </table>
+<div class="contAdd col-12 d-flex">
+  <div class="col-6">
+    <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viaModal">
+    Agregar Via
+  </button>
+
+  <div id="scroll-container">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Código</th>
+              <th scope="col">vías de administración</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in vias %}
+            <tr>
+              <th scope="row">{{ i.id }}</th>
+              <td>{{i.nombre}}</td>
+              <td>
+                  <a href="{% url 'eliminarVia' i.id %}">
+                    <button id="btneliminar">
+                      <img id="icono_card" src="{% static 'resource/delete.png' %}" alt="">
+                      Eliminar</button>
+                  </a>
+              </td>
+            </tr>
+            {% endfor %}
+        </table>
+  </div>
 </div>
+  <div class="col-6" id="imgCard">
+    <img src="{% static 'resource/viaIcono.png' %}" alt="">
+  </div>
 </div>
 {% endblock %}

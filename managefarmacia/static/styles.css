@@ -21,7 +21,7 @@
   text-decoration: none;
   width: 100%;
   text-align: center;
-  font-size: large;
+  font-size: medium;
   font-weight: 500;
 }
 .container div div a img {
@@ -33,5 +33,65 @@
 }
 
 #icono {
-  width: 15%;
+  width: 12%;
+}
+
+#navbar {
+  background-color: rgba(246, 246, 246, 0.9411764706);
+  border-bottom: solid 1px #d1d1d1;
+}
+#navbar #icono_nav {
+  width: 1rem;
+}
+#navbar ul {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: end;
+  text-align: end;
+  align-items: end;
+}
+#navbar ul li {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.contAdd {
+  display: flex;
+  justify-content: space-around;
+}
+.contAdd div {
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin: 1rem 0 1rem 0;
+}
+.contAdd #btneliminar {
+  border: none;
+  background-color: red;
+  color: rgba(246, 246, 246, 0.9411764706);
+  border-radius: 5px;
+}
+.contAdd #icono_card {
+  width: 1.4rem;
+  margin: 2px 2px 2px 2px;
+}
+
+.scroll-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#scroll-container {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+#imgCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#imgCard img {
+  width: 80%;
 }/*# sourceMappingURL=styles.css.map */

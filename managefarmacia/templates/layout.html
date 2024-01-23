@@ -16,21 +16,24 @@
 
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg" id="navbar">
         <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <p>Bienvenido Usuario</p>
+              <li class="nav-item col-2">
+                <a>Bienvenido a su administrador</a>
               </li>
-              <li class="nav-item">
-                <p>Cambiar Contraseña</p>
+              <li class="nav-item col-1">
+                <a href="{% url "index" %}"><img id="icono_nav" src="{% static 'resource/casa-clasica.png' %}" alt="">Inicio</a>
               </li>
-              <li class="nav-item">
-                <p>Salir</p>
+              <li class="nav-item col-2">
+                <a href=""><img id="icono_nav" src="{% static 'resource/ajuste.png' %}" alt="">Cambiar Contraseña</a>
+              </li>
+              <li class="nav-item col-1">
+                <a href=""><img id="icono_nav" src="{% static 'resource/salida.png' %}" alt="">Salir</a>
               </li>
             </ul>
           </div>

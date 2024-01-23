@@ -1,14 +1,7 @@
 {% extends "layout.html" %}
-
+{% load static %}
 {% block body %}
 
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#laboratorioModal">
-  Agregar Laboratorio
-</button>
-
-<!-- Modal -->
 <div class="modal fade" id="laboratorioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -29,28 +22,46 @@
   </div>
 </div>
 
-<div>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Código</th>
-            <th scope="col">Laboratorio</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for i in laboratorios %}
-          <tr>
-            <th scope="row">{{ i.id }}</th>
-            <td>{{i.nombre}}</td>
-            <td>
-                <a href="{% url 'eliminarLaboratorio' i.id %}">
-                  <button>Eliminar</button>
-                </a>
-            </td>
-          </tr>
-          {% endfor %}
-      </table>
-</div>
-</div>
+<div class="contAdd col-12 d-flex">
+  <div class="col-6">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#laboratorioModal">
+        Agregar Laboratorio
+      </button>
+      
+      <!-- Modal -->
+      
+      <div id="scroll-container">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Código</th>
+                  <th scope="col">Laboratorio</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in laboratorios %}
+                <tr>
+                  <th scope="row">{{ i.id }}</th>
+                  <td>{{i.nombre}}</td>
+                  <td>
+                      <a href="{% url 'eliminarLaboratorio' i.id %}">
+                        <button id="btneliminar">
+                          <img id="icono_card" src="{% static 'resource/delete.png' %}" alt="">
+                          Eliminar</button>
+                      </a>
+                  </td>
+                </tr>
+                {% endfor %}
+            </table>
+      </div>
+      </div>
+      <div class="col-6" id="imgCard">
+        <img src="{% static 'resource/laboratorioIcono.png' %}" alt="">
+      </div>
+  </div>
+
+
+
 {% endblock %}

@@ -1,3 +1,9 @@
+$prin_color: #1494EB;
+$sec_color: #3FEBB1;
+$ter_color: #f6f6f6f0;
+$cuar_color: #d1d1d1;
+
+// INDEX
 .container{
     //align-items: center; //eje x
     justify-content: center; // eje y
@@ -18,11 +24,11 @@
             padding: 1rem 0 1rem 0;
 
             a{
-                color: #1494EB;
+                color: $prin_color;
                 text-decoration: none;
                 width: 100%;
                 text-align: center;
-                font-size: large;
+                font-size: medium;
                 font-weight: 500;
 
                 img{
@@ -39,5 +45,73 @@
 }
 
 #icono{
-    width: 15%;
+    width: 12%;
+}
+
+// Layout
+#navbar{
+    background-color: $ter_color;
+    border-bottom: solid 1px $cuar_color;
+
+    #icono_nav{
+        width: 1rem;
+    }
+
+    ul{
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: end;
+        text-align: end;
+        align-items: end;
+
+        li{
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+    }
+}
+
+.contAdd{
+    display: flex;
+    justify-content: space-around;
+    div{
+        padding: 0.5rem;
+        border-radius: 5px;
+        margin: 1rem 0 1rem 0;
+    }
+
+    #btneliminar{
+        border: none;
+        background-color: red;
+        color: $ter_color;
+        border-radius: 5px;
+    }
+
+    #icono_card{
+        width: 1.4rem;
+        margin: 2px 2px 2px 2px;
+    }
+}
+
+
+.scroll-container {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#scroll-container {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+#imgCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img{
+        width: 80%;
+    }
 }
