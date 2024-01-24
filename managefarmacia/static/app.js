@@ -193,6 +193,8 @@ function completarVenta(){
     var medico = document.getElementById("medico").value;
     var codMinsa = document.getElementById("codMinsa").value;
 
+    console.log(carrito)
+
     fetch('comprarProducto',{
         method: 'POST',
         headers: {
@@ -213,6 +215,7 @@ function completarVenta(){
         listaArticulos = [];
         total=0;
         localStorage.clear();
+        alert("Compra Realizada")
         setTimeout(function() {
             window.location.reload();
         }, 1000);

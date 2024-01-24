@@ -199,17 +199,29 @@ def comprarProducto_views(request):
         compras = carrito.get('compras', [])
         descuento = carrito.get('descuento', False)
         total = carrito.get('total', 0.0)
-        medico = carrito.get('medico', '')
-        codMinsa = carrito.get('codMinsa', '')
+        # medico = carrito.get('medico', '')
+        # codMinsa = carrito.get('codMinsa', '')
         
         for compra in compras:
             print(f"{compra['id']} {compra['cantidad']}")
             
             producto_id = compra.get('id')
             cantidad = compra.get('cantidad')
+            
+            print("----------------------")
+            print(f"CANTIDAD DE PRODUCTO A RESTAR: {compra['cantidad']}")
+            
             precio_unitario = float(compra.get('precio'))
             
-            producto_obj = producto.objects.get(id=producto_id)
+            producto_obj = producto.objects.get(codigo=producto_id)
+            
+            print("----------------------")
+            print(f"CANT PRODUCTO ANTES: {producto_obj.cantidad}")
+            
+            producto_obj.cantidad = producto_obj.cantidad - int(cantidad)
+            
+            print("----------------------")
+            print(f"CANT PRODUCTO DESPUES: {producto_obj.cantidad}")
             
             if descuento:
                 monto = float(cantidad) * (producto_obj.precio * 0.9)
@@ -224,6 +236,17 @@ def comprarProducto_views(request):
             )
             
             nueva_venta.save()
+            
+            # if(medico and codMinsa):
+            #     recetas(
+            #         id_compra = venta.objects.get(id = nueva_venta.id),
+            #         id_producto = producto.objects.get(codigo=producto_id),
+            #         medico = medico,
+            #         codMinsa = codMinsa
+            #     ).save()
+            
+            producto_obj.save()
+            
             print("Venta guardada correctamente.")
         
         movimiento(
@@ -231,17 +254,7 @@ def comprarProducto_views(request):
             monto = total,
             fecha = datetime.now().date()
         ).save()
-        
-        if(medico and codMinsa):
-            recetas(
-                id_compra = nueva_venta,
-                id_producto = producto.objects.get(codigo=producto_id),
-                medico = medico,
-                codMinsa = codMinsa
-            ).save()
-        
-        #HACE FALTA AGREGAR EL MOVIMIENTO PARA EL INVENTARIO
-        
+                
         
         return JsonResponse({'mensaje': 'Entró al método correctamente'}, status=200)
     
@@ -249,3 +262,14 @@ def comprarProducto_views(request):
         return JsonResponse({'mensaje': f'Error: Producto con id {producto_id} no encontrado.'}, status=400)
     except Exception as e:
         return JsonResponse({'mensaje': str(e)}, status=500)
+    
+    
+def inventario_views(request):
+    return render(request, 'inventario.html',{
+        'productos': producto.objects.all()
+    })
+    
+def movimiento_views(request):
+    return render(request, 'movimientos.html',{
+        'mov': movimiento.objects.all()
+    })

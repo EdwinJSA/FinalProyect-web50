@@ -5,7 +5,7 @@ class nuevo_producto(forms.Form):
     codigo = forms.CharField(max_length=50)
     nombre_generico = forms.CharField(max_length=50)
     nombre_cientifico = forms.CharField(max_length=50)
-    descripcion = forms.CharField(widget=forms.Textarea)
+    descripcion = forms.CharField(widget=forms.Textarea(attrs={'style': 'max-height: 60px;'}))
     categoria = forms.ModelChoiceField(queryset=categoria.objects.all())
     via = forms.ModelChoiceField(queryset=via_consumo.objects.all())
     req_receta = forms.BooleanField()

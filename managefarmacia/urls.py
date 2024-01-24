@@ -20,4 +20,6 @@ urlpatterns = [
     path("nuevaCompra", views.nueva_compra_views, name="nuevaCompra"),
     path("ventas", views.ventas_views, name="ventas"),
     path("comprarProducto", views.comprarProducto_views, name="comprarProducto"),
+    path("inventario", views.inventario_views, name="inventario"),
+    path("movimiento", views.movimiento_views, name="movimiento"),
 ]

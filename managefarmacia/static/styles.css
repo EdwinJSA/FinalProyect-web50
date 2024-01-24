@@ -56,6 +56,10 @@
   justify-content: center;
   display: flex;
 }
+#navbar ul li a {
+  text-decoration: none;
+  color: black;
+}
 
 .contAdd {
   display: flex;
@@ -94,4 +98,91 @@
 }
 #imgCard img {
   width: 80%;
+}
+
+#form {
+  box-shadow: 4px 8px 20px 2px rgba(0, 0, 0, 0.32);
+  -webkit-box-shadow: 4px 8px 20px 2px rgba(0, 0, 0, 0.32);
+  -moz-box-shadow: 4px 8px 20px 2px rgba(0, 0, 0, 0.32);
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+}
+#form div {
+  margin: 1rem 0 1rem 0;
+}
+#form div select {
+  width: 100%;
+}
+#form div input {
+  width: 100%;
+}
+#form div input #id_req_receta {
+  border: solid 1px #1494EB;
+}
+
+.contCompra {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contCompraS {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+.contCompraS div {
+  margin: 1rem;
+}
+
+input #id_req_receta {
+  border: solid 1px #1494EB;
+}
+
+#contVentas {
+  display: block;
+}
+#contVentas .listaProductos {
+  display: block;
+  border: none;
+}
+#contVentas .gestion {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border: none;
+}
+#contVentas .gestion div {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+#contVentas .gestion div input {
+  width: 30%;
+}
+#contVentas .gestion button {
+  width: 100%;
+}
+
+#buscar {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+#buscar .BtnArt {
+  display: block;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  margin-right: 1.5rem;
+}
+#buscar .BtnArt button {
+  width: 100%;
+  font-size: x-small;
+}
+
+#extras input {
+  margin: 0 1rem 0 1rem;
 }/*# sourceMappingURL=styles.css.map */

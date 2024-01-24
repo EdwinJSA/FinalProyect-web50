@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block body %}
+<div class="otros col-12 justify-content-center d-flex" id="scroll-container">
+    <div class="buscar d-block col-8" id="buscar">
+        <input type="text" class="text" placeholder="Buscar Producto" id="buscadorProductos">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom.Científico</th>
+                    <th>Nom.Genérico</th>
+                    <th>Precio</th>
+                    <th>Unidad</th>
+                    <th>Vía</th>
+                    <th>Categoría</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody id="scroll-container">
+                {% for i in productos %}
+                    <tr class="articulos">
+                        <td>{{ i.nombre_cientifico }}</td>
+                        <td>{{ i.nombre_generico }}</td>
+                        <td>C$ {{ i.precio }}</td>
+                        <td>{{ i.unidad.nombre }}</td>
+                        <td>{{ i.via }}</td>
+                        <td>{{ i.categoria }}</td>
+                        <td>{{ i.cantidad }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

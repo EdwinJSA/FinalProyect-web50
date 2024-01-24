@@ -1,18 +1,20 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <div class="container">
-        <div class="listaProductos">
+    <div class="container col-12 d-flex" id="contVentas">
+        <div class="listaProductos col-9">
+            
             <div class="gestion">
                 {{ form }}
-                <div id="nombreMedico" class="d-none">
-                    <spam>*Esta medicina requiere receta, ingrese el nombre del médico</spam>
-                    <input type="text" name="medico"  id="medico" placeholder="Ingrese el nombre del médico">
-                    <input type="text" name="codMinsa" id="codMinsa" placeholder="Código del Minsa">
-                </div>
                 <button type="button" onclick="agregarCarrito()">Agregar al Carrito</button>
             </div>
-            <div class="carrito">
+            
+            <div id="nombreMedico" class="d-none">
+                <spam>*Esta medicina requiere receta, ingrese el nombre del médico</spam>
+                <input type="text" name="medico"  id="medico" placeholder="Nombre del médico">
+                <input type="text" name="codMinsa" id="codMinsa" placeholder="Código del Minsa">
+            </div>
+            <div class="carrito" id="scroll-container">
                 <table class="table">
                     <thead class="thead-light">
                       <tr>
@@ -28,21 +30,22 @@
                     </tbody>
                   </table>
             </div>
-                <div>
-                    <label for="aplicarDescuento">Aplicar 10% descuento</label>
-                    <input type="checkbox" name="aplicarDescuento" id="aplicarDescuento" value="true">
-                </div>
-                <div>
-                    <spam id="precioFinal"></spam>
-                    <spam id="descuento"></spam>
-                </div>
+
+            <div id="extras">
+                <label for="aplicarDescuento">Aplicar 10% descuento</label>
+                <input type="checkbox" name="aplicarDescuento" id="aplicarDescuento" value="true">
+                <spam id="precioFinal"></spam>
+                <spam id="descuento"></spam>
                 <button type="button" onclick="completarVenta()">Completar Venta</button>
             </div>
+
         </div>
-        <div class="otros">
-            <div class="buscar">
+
+
+        <div class="otros col-3">
+            <div class="buscar d-block" id="buscar">
                 <input type="text" class="text" placeholder="Buscar Producto" id="buscadorProductos">
-                <ul>
+                <ul class="BtnArt" id="scroll-container">
                     {% for i in productos %}
                         <button class="articulos" data-receta={{ i.req_receta }}  data-nombre-cientifico="{{ i.nombre_cientifico }}" data-precio="{{ i.precio }}" data-codigo="{{ i.codigo }}">
                             {{ i.nombre_cientifico }} / {{ i.nombre_generico }} / C$ {{ i.precio }} / Unidad: {{ i.unidad.nombre }}
@@ -50,7 +53,8 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="vademecu"></div>
         </div>
+        
+        <!--<div class="vademecu"></div>-->
     </div>
 {% endblock %}

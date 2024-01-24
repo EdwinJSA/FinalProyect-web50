@@ -1,12 +1,16 @@
 {% extends "layout.html" %}
-
+{% load static %}
 {% block body %}
-    <div>
-        <button type="button" id="controlClick" onclick="activarBoton()">¿Comprobé los datos?</button>
+    <div class="contCompra col-12">
+        <form class="col-6" id="form">
+            {% csrf_token %}
+            {{ form }}
+            <button type="button" class="mt-2 btn btn-success" onclick="nuevaCompra()" disabled id="completar">Completar Compra</button>
+        </form>
     </div>
-    <form class="col-6" id="form">
-        {% csrf_token %}
-        {{ form }}
-        <button type="button" class="mt-2 btn btn-success" onclick="nuevaCompra()" disabled id="completar">Completar Compra</button>
-    </form>
+    <div class="contCompraS col-12">
+        <div class="seguro">
+            <button type="button" id="controlClick" onclick="activarBoton()">¿Comprobé los datos?</button>
+        </div>
+    </div>
 {% endblock %}

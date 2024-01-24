@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block body %}
+<div class="otros col-12 justify-content-center d-flex" id="scroll-container">
+    <div class="buscar d-block col-8" id="buscar">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Estado</th>
+                    <th>Monto</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody id="scroll-container">
+                {% for i in mov %}
+                    <tr class="articulos">
+                        {% if i.entrada %}
+                            <td>Entrada</td>
+                        {% else %}
+                            <td>Salida</td>
+                        {% endif %}
+                        <td>C$ {{ i.monto }}</td>
+                        <td>{{ i.fecha }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

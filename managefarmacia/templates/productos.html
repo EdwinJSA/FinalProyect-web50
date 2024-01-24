@@ -3,8 +3,8 @@
 {% load static %}
 {% block body %}
 
-<div class="col-12 d-flex align-items-center justify-content-center">
-    <form class="col-6" id="form">
+<div class="col-12 d-flex align-items-center justify-content-around">
+    <form class="col-4" id="form">
         {% csrf_token %}
         {{ form }}
         <button type="button" class="mt-2 btn btn-success" onclick="nuevoProducto()">Agregar</button>

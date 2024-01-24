@@ -69,6 +69,11 @@ $cuar_color: #d1d1d1;
             align-items: center;
             justify-content: center;
             display: flex;
+
+            a{
+                text-decoration: none;
+                color: black
+            }
         }
     }
 }
@@ -113,5 +118,107 @@ $cuar_color: #d1d1d1;
 
     img{
         width: 80%;
+    }
+}
+
+
+#form{
+    box-shadow: 4px 8px 20px 2px rgba(0,0,0,0.32);
+        -webkit-box-shadow: 4px 8px 20px 2px rgba(0,0,0,0.32);
+        -moz-box-shadow: 4px 8px 20px 2px rgba(0,0,0,0.32);
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 5px;
+    div{
+        margin: 1rem 0 1rem 0;
+        select{
+            width: 100%;
+        }
+        input{
+            width: 100%;
+
+            #id_req_receta{
+                border: solid 1px #1494EB;
+            }
+        }
+    }
+}
+
+
+.contCompra{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contCompraS{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+
+    div{
+        margin: 1rem;
+    }
+}
+
+input #id_req_receta{
+    border: solid 1px #1494EB;
+}
+
+#contVentas{
+    display: block;
+    
+
+    .listaProductos{
+        display: block;
+        border: none;
+    }
+
+    .gestion{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        border: none;
+
+        div{
+            display: block;
+            margin: 0;
+            padding: 0;
+            border: none;
+
+            input{
+                width: 30%;
+            }
+        }
+
+        button{
+            width: 100%;
+        }
+    }
+}
+
+#buscar{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .BtnArt{
+        display: block;
+        justify-content: center;
+        align-items:flex-start;
+        text-align: left;
+        margin-right: 1.5rem;
+
+        button{
+            width: 100%;
+            font-size: x-small;
+        }
+    }
+}
+
+#extras{
+
+    input{
+        margin: 0 1rem 0 1rem;
     }
 }
